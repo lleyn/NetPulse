@@ -1,0 +1,79 @@
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NetPulse" Width="300" Height="192" WindowStyle="None" ResizeMode="NoResize"
+        AllowsTransparency="True" Background="Transparent" ShowInTaskbar="False"
+        Topmost="True" FontFamily="Segoe UI" Foreground="#F4F6FB"
+        UseLayoutRounding="True" SnapsToDevicePixels="True">
+  <Window.Resources>
+    <Style TargetType="Button">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="#939AAC"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Width" Value="26"/>
+      <Setter Property="Height" Value="26"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Border x:Name="Chrome" Background="{TemplateBinding Background}" CornerRadius="7">
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Chrome" Property="Background" Value="#2D3341"/><Setter Property="Foreground" Value="White"/></Trigger>
+              <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Chrome" Property="Background" Value="#35415B"/></Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </Window.Resources>
+  <Border x:Name="Card" Margin="8" CornerRadius="19" BorderThickness="1" BorderBrush="#394252">
+    <Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#202736"/><GradientStop Color="#171C27" Offset="1"/></LinearGradientBrush></Border.Background>
+    <Border.Effect><DropShadowEffect BlurRadius="12" ShadowDepth="2" Opacity="0.28"/></Border.Effect>
+    <Grid Margin="16,11,16,12">
+      <Grid.RowDefinitions><RowDefinition Height="28"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+      <Grid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+          <Ellipse x:Name="StatusDot" Width="6" Height="6" Fill="#6CDDB1" Margin="0,0,8,0"/>
+          <TextBlock Text="NET PULSE" FontSize="10" FontWeight="SemiBold" Foreground="#C1C9D9" VerticalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+          <Button x:Name="CompactButton" Content="−" FontSize="17" ToolTip="Компактный режим (двойной щелчок по окну)" AutomationProperties.Name="Компактный режим"/>
+          <Button x:Name="MenuButton" Content="···" FontSize="18" ToolTip="Настройки" AutomationProperties.Name="Настройки"/>
+        </StackPanel>
+      </Grid>
+      <Grid x:Name="ExpandedPanel" Grid.Row="1" Margin="0,6,0,0">
+        <Grid.RowDefinitions><RowDefinition Height="60"/><RowDefinition Height="32"/><RowDefinition Height="19"/></Grid.RowDefinitions>
+        <Grid>
+          <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="20"/><ColumnDefinition/></Grid.ColumnDefinitions>
+          <StackPanel>
+            <TextBlock Text="↓  ЗАГРУЗКА" Foreground="#80C8FF" FontSize="9" FontWeight="SemiBold"/>
+            <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+              <TextBlock x:Name="DownValue" Text="—" FontSize="26" FontWeight="SemiBold"/>
+              <TextBlock x:Name="DownUnit" Text="КБ/с" FontSize="10" Foreground="#9EA8BB" Margin="5,0,0,5" VerticalAlignment="Bottom"/>
+            </StackPanel>
+          </StackPanel>
+          <Border Grid.Column="1" Width="1" Height="32" Background="#343C4C" HorizontalAlignment="Center"/>
+          <StackPanel Grid.Column="2">
+            <TextBlock Text="↑  ОТДАЧА" Foreground="#B6A2FF" FontSize="9" FontWeight="SemiBold"/>
+            <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+              <TextBlock x:Name="UpValue" Text="—" FontSize="26" FontWeight="SemiBold"/>
+              <TextBlock x:Name="UpUnit" Text="КБ/с" FontSize="10" Foreground="#9EA8BB" Margin="5,0,0,5" VerticalAlignment="Bottom"/>
+            </StackPanel>
+          </StackPanel>
+        </Grid>
+        <Grid x:Name="GraphHost" Grid.Row="1" ClipToBounds="True" ToolTip="Последние 60 секунд · общая шкала загрузки и отдачи"/>
+        <Grid Grid.Row="2" Margin="0,4,0,0">
+          <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="40"/></Grid.ColumnDefinitions>
+          <TextBlock x:Name="AdapterLabel" Text="Подключение…" Foreground="#959EB1" FontSize="10" TextTrimming="CharacterEllipsis"/>
+          <TextBlock Text="60 сек" Grid.Column="1" HorizontalAlignment="Right" Foreground="#747F95" FontSize="9"/>
+        </Grid>
+      </Grid>
+      <Grid x:Name="CompactPanel" Grid.Row="1" Visibility="Collapsed" Margin="0,4,0,0">
+        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+        <TextBlock x:Name="CompactDown" Text="↓ —" Foreground="#80C8FF" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center"/>
+        <TextBlock x:Name="CompactUp" Text="↑ —" Grid.Column="1" Foreground="#B6A2FF" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center"/>
+      </Grid>
+    </Grid>
+  </Border>
+</Window>

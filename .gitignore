@@ -1,0 +1,11 @@
+dist/
+test-output/
+NetPulse-Windows11/
+bin/
+obj/
+.vs/
+*.zip
+*.exe
+*.pdb
+*.settings.xml
+*.settings.xml.tmp
